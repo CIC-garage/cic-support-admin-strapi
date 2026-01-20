@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "madinetmasrs",
+  "info": {
+    "singularName": "madinetmasr",
+    "pluralName": "madinetmasrs",
+    "displayName": "madinetmasr"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "text"
+    },
+    "attachments": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "stage": {
+      "type": "enumeration",
+      "enum": [
+        "open",
+        "inprogress",
+        "closed"
+      ]
+    }
+  }
+}
