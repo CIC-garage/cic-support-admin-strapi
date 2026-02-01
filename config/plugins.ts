@@ -1,19 +1,27 @@
+// export default () => ({});
+
 export default {
   email: {
     config: {
-      provider: 'nodemailer',
+      provider: "nodemailer",
       providerOptions: {
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true, // true for port 465
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
+        secure: true,
+
         auth: {
-          user: 'ayoussif360@gmail.com',     
-          pass: 'crikvafishzwvlje',        
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+
+        tls: {
+          rejectUnauthorized: false,
         },
       },
+
       settings: {
-        defaultFrom: 'ayoussif360@gmail.com',
-        defaultReplyTo: 'ayoussif360@gmail.com',
+        defaultFrom: process.env.SMTP_USER,
+        defaultReplyTo: process.env.SMTP_USER,
       },
     },
   },

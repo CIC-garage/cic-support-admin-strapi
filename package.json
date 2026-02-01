@@ -1,5 +1,5 @@
 {
-  "name": "support-cic-admin",
+  "name": "cic_support_strapi",
   "version": "0.1.0",
   "private": true,
   "description": "A Strapi application",
