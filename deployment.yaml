@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: strapi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: strapi
+  template:
+    metadata:
+      labels:
+        app: strapi
+    spec:
+      containers:
+        - name: strapi
+          image: strapi/strapi
+          ports:
+            - containerPort: 1337
+          env:
+            - name: HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-config
+                  key: HOST
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-config
+                  key: PORT
+            - name: APP_KEYS
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-config
+                  key: APP_KEYS
+            - name: API_TOKEN_SALT
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-config
+                  key: API_TOKEN_SALT
+            - name: ADMIN_JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-config
+                  key: ADMIN_JWT_SECRET
+            - name: TRANSFER_TOKEN_SALT
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-config
+                  key: TRANSFER_TOKEN_SALT
+            - name: JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: strapi-config
+                  key: JWT_SECRET
+            # - name: C4C_USER
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: strapi-config
+            #       key: C4C_USER
+            # - name: C4C_PASSWORD
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: strapi-config
+            #       key: C4C_PASSWORD
+            # - name: NEXT_PUBLIC_C4C_URL
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: strapi-config
+            #       key: NEXT_PUBLIC_C4C_URL
+            # - name: NEXT_PUBLIC_STRAPI_URL
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: strapi-config
+            #       key: NEXT_PUBLIC_STRAPI_URL
