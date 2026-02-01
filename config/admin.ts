@@ -1,17 +1,14 @@
 export default ({ env }) => ({
   auth: {
-    secret: env('ADMIN_JWT_SECRET'),
+    secret: env('ADMIN_JWT_SECRET','tobemodified'),
   },
   apiToken: {
-    salt: env('API_TOKEN_SALT'),
+    salt: env('API_TOKEN_SALT','tobemodified'),
   },
   transfer: {
     token: {
-      salt: env('TRANSFER_TOKEN_SALT'),
+      salt: env('TRANSFER_TOKEN_SALT','tobemodified'),
     },
-  },
-  secrets: {
-    encryptionKey: env('ENCRYPTION_KEY'),
   },
   flags: {
     nps: env.bool('FLAG_NPS', true),
