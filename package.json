@@ -15,11 +15,12 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
-    "@strapi/plugin-cloud": "5.33.3",
-    "@strapi/plugin-users-permissions": "5.33.3",
+    "@strapi/plugin-cloud": "^5.9.0",
+    "@strapi/plugin-users-permissions": "^5.9.0",
     "@strapi/provider-email-nodemailer": "^5.33.3",
     "@strapi/strapi": "5.33.3",
     "better-sqlite3": "12.4.1",
+    "mysql2": "^3.16.2",
     "nodemailer": "^7.0.12",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
