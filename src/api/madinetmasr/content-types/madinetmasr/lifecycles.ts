@@ -16,7 +16,7 @@ export default {
     // Prevent duplicate emails
     if (fullEntry.emailSent) return;
 
-    const { title, desc, attachments } = fullEntry;
+    const { title, desc, attachments, priority, condition } = fullEntry;
 
     // Build HTML for attachments (if any)
     const attachmentsHtml =
@@ -25,7 +25,7 @@ export default {
             .map((file: any) => {
               const fileUrl = file.url.startsWith('http')
                 ? file.url
-                : `http://localhost:1337${file.url}`;
+                : `https://cic-support-dev.eshtri-cluster-eu-de-1-bx-8f23923b84c5cec3cecb2d74397b77c3-0000.eu-de.containers.appdomain.cloud${file.url}`;
               return `<li><a href="${fileUrl}" target="_blank">${file.name}</a></li>`;
             })
             .join('')
@@ -34,6 +34,8 @@ export default {
     const emailHtml = `
       <p><strong>Title:</strong> ${title}</p>
       <p><strong>Description:</strong> ${desc}</p>
+      <p><strong>Priority:</strong> ${priority}</p>
+      <p><strong>Type:</strong> ${condition}</p>
       <p><strong>Attachments:</strong></p>
       <ul>${attachmentsHtml}</ul>
     `;
