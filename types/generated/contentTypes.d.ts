@@ -445,6 +445,7 @@ export interface ApiMadinetmasrMadinetmasr extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    condition: Schema.Attribute.Enumeration<['Issue', 'Change Request']>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -460,7 +461,6 @@ export interface ApiMadinetmasrMadinetmasr extends Struct.CollectionTypeSchema {
     response: Schema.Attribute.DynamicZone<['text.text']>;
     stage: Schema.Attribute.Enumeration<['open', 'inprogress', 'closed']>;
     title: Schema.Attribute.String;
-    type: Schema.Attribute.Enumeration<['Issue', 'Change Request']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

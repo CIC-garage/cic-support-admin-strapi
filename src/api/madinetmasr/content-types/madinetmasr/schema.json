@@ -27,7 +27,7 @@
         "audios"
       ]
     },
-    "type": {
+    "condition": {
       "type": "enumeration",
       "enum": [
         "Issue",

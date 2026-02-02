@@ -1,21 +1,12 @@
-export default ({ env }) => ({
+// config/admin.js
+import crypto from 'crypto';
+
+module.exports = ({ env }) => ({
   auth: {
-    secret: env('ADMIN_JWT_SECRET', 'tobemodified'),
-    sessions: {
-      maxRefreshTokenLifespan: 30 * 24 * 60 * 60 * 1000,
-      maxSessionLifespan: 7 * 24 * 60 * 60 * 1000,
-    },
+    secret: env('ADMIN_JWT_SECRET'),
   },
   apiToken: {
-    salt: env('API_TOKEN_SALT', 'tobemodified'),
-  },
-  transfer: {
-    token: {
-      salt: env('TRANSFER_TOKEN_SALT', 'tobemodified'),
-    },
-  },
-  flags: {
-    nps: env.bool('FLAG_NPS', true),
-    promoteEE: env.bool('FLAG_PROMOTE_EE', true),
+    // generate a 16-byte random salt
+    salt: env('API_TOKEN_SALT', crypto.randomBytes(16).toString('base64')),
   },
 });
