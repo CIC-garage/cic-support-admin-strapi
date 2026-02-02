@@ -455,9 +455,12 @@ export interface ApiMadinetmasrMadinetmasr extends Struct.CollectionTypeSchema {
       'api::madinetmasr.madinetmasr'
     > &
       Schema.Attribute.Private;
+    priority: Schema.Attribute.Enumeration<['Low', 'Medium', 'High']>;
     publishedAt: Schema.Attribute.DateTime;
+    response: Schema.Attribute.DynamicZone<['text.text']>;
     stage: Schema.Attribute.Enumeration<['open', 'inprogress', 'closed']>;
     title: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<['Issue', 'Change Request']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

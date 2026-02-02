@@ -27,12 +27,33 @@
         "audios"
       ]
     },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Issue",
+        "Change Request"
+      ]
+    },
     "stage": {
       "type": "enumeration",
       "enum": [
         "open",
         "inprogress",
         "closed"
+      ]
+    },
+    "priority": {
+      "type": "enumeration",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ]
+    },
+    "response": {
+      "type": "dynamiczone",
+      "components": [
+        "text.text"
       ]
     }
   }
