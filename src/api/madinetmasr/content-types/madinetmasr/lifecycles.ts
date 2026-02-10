@@ -42,7 +42,7 @@ export default {
 
     try {
       await strapi.plugin('email').service('email').send({
-        to: 'aymfoles@gmail.com',
+        to: 'helpdesk@cic.ae',
         subject: `Madinet Masr Change Request: ${title}`,
         html: emailHtml,
       });
