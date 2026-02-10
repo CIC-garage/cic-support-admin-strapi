@@ -7,7 +7,7 @@ export default {
       providerOptions: {
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT,
-        secure: true,
+        secure: false,
 
         auth: {
           user: process.env.SMTP_USER,
