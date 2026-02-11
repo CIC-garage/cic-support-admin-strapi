@@ -37,7 +37,7 @@ export default {
         ? response
             .map((r: any) => `<li><b>${r.user}:</b> ${r.text}</li>`)
             .join('')
-        : '<li>No responses yet</li>';
+        : '<li>We\'ve received your request and will investigate further. You\'ll hear back from us soon, Thank you</li>';
 
     const html = `
       <h3>New Support Ticket</h3>
