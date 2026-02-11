@@ -1,24 +1,23 @@
 export default {
   async afterCreate(event: any) {
-    // Only trigger for madinetmasr content type
     if (event.model?.uid !== 'api::madinetmasr.madinetmasr') return;
 
     const { result } = event;
 
-    // Fetch the full entry with attachments populated
-    const fullEntry = await strapi.db
+    if (result.emailSent === true) return;
+
+    const entry = await strapi.db
       .query('api::madinetmasr.madinetmasr')
       .findOne({
         where: { id: result.id },
-        populate: ['attachments'], // ensure files are loaded
+        populate: ['attachments', 'response'],
       });
 
-    // Prevent duplicate emails
-    if (fullEntry.emailSent) return;
+    if (!entry) return;
 
-    const { title, desc, attachments, priority, condition } = fullEntry;
+    const { title, desc, attachments, priority, condition, email, response } = entry;
 
-    // Build HTML for attachments (if any)
+    // Build attachments HTML
     const attachmentsHtml =
       attachments?.length
         ? attachments
@@ -26,39 +25,50 @@ export default {
               const fileUrl = file.url.startsWith('http')
                 ? file.url
                 : `https://cic-support-dev.eshtri-cluster-eu-de-1-bx-8f23923b84c5cec3cecb2d74397b77c3-0000.eu-de.containers.appdomain.cloud${file.url}`;
+
               return `<li><a href="${fileUrl}" target="_blank">${file.name}</a></li>`;
             })
             .join('')
         : '<li>No attachments</li>';
 
-    const emailHtml = `
-      <p><strong>Title:</strong> ${title}</p>
-      <p><strong>Description:</strong> ${desc}</p>
-      <p><strong>Priority:</strong> ${priority}</p>
-      <p><strong>Type:</strong> ${condition}</p>
-      <p><strong>Attachments:</strong></p>
+    // Build responses HTML
+    const responsesHtml =
+      response?.length
+        ? response
+            .map((r: any) => `<li><b>${r.user}:</b> ${r.text}</li>`)
+            .join('')
+        : '<li>No responses yet</li>';
+
+    const html = `
+      <h3>New Support Ticket</h3>
+      <p><b>Title:</b> ${title}</p>
+      <p><b>Description:</b> ${desc}</p>
+      <p><b>Priority:</b> ${priority}</p>
+      <p><b>Type:</b> ${condition}</p>
+
+      <p><b>Attachments:</b></p>
       <ul>${attachmentsHtml}</ul>
+
+      <p><b>Responses:</b></p>
+      <ul>${responsesHtml}</ul>
     `;
 
     try {
       await strapi.plugin('email').service('email').send({
-        to: 'helpdesk@cic.ae',
+        to: ['helpdesk@cic.ae', email],
         subject: `Madinet Masr Ticket: ${title}`,
-        html: emailHtml,
+        html,
       });
 
-      strapi.log.info(`Email sent for madinetmasr: ${title}`);
-
-      // Mark entry as emailed to prevent duplicates
+      // Mark ticket as emailed
       await strapi.db.query('api::madinetmasr.madinetmasr').update({
-        where: { id: fullEntry.id },
+        where: { id: entry.id },
         data: { emailSent: true },
       });
+
+      strapi.log.info(`Ticket email sent: ${title}`);
     } catch (err) {
-      strapi.log.error(
-        `Failed to send email for madinetmasr ${title}:`,
-        err
-      );
+      strapi.log.error('Create mail failed', err);
     }
   },
 };

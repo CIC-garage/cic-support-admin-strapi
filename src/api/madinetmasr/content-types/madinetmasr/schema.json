@@ -55,6 +55,9 @@
       "components": [
         "text.text"
       ]
+    },
+    "email": {
+      "type": "string"
     }
   }
 }

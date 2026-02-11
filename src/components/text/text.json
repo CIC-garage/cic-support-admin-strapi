@@ -5,6 +5,9 @@
   },
   "options": {},
   "attributes": {
+    "user": {
+      "type": "string"
+    },
     "text": {
       "type": "text"
     }

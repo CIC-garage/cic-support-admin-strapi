@@ -17,6 +17,7 @@ export interface TextText extends Struct.ComponentSchema {
   };
   attributes: {
     text: Schema.Attribute.Text;
+    user: Schema.Attribute.String;
   };
 }
 
