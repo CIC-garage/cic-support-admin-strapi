@@ -21,7 +21,7 @@ export default {
 
       settings: {
         defaultFrom: process.env.SMTP_USER,
-        defaultReplyTo: process.env.SMTP_USER,
+        defaultReplyTo: process.env.SMTP_RESPONSE,
       },
     },
   },
