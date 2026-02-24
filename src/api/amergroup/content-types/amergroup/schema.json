@@ -1,0 +1,63 @@
+{
+  "kind": "collectionType",
+  "collectionName": "amergroups",
+  "info": {
+    "singularName": "amergroup",
+    "pluralName": "amergroups",
+    "displayName": "amergroup"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "string"
+    },
+    "attachments": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "condition": {
+      "type": "enumeration",
+      "enum": [
+        "Issue",
+        "Change Request"
+      ]
+    },
+    "stage": {
+      "type": "enumeration",
+      "enum": [
+        "open",
+        "inprogress",
+        "closed"
+      ]
+    },
+    "priority": {
+      "type": "enumeration",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ]
+    },
+    "response": {
+      "type": "dynamiczone",
+      "components": [
+        "text.text"
+      ]
+    },
+    "email": {
+      "type": "string"
+    }
+  }
+}

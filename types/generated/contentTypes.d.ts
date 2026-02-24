@@ -430,6 +430,44 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAmergroupAmergroup extends Struct.CollectionTypeSchema {
+  collectionName: 'amergroups';
+  info: {
+    displayName: 'amergroup';
+    pluralName: 'amergroups';
+    singularName: 'amergroup';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    attachments: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    condition: Schema.Attribute.Enumeration<['Issue', 'Change Request']>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    desc: Schema.Attribute.String;
+    email: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::amergroup.amergroup'
+    > &
+      Schema.Attribute.Private;
+    priority: Schema.Attribute.Enumeration<['Low', 'Medium', 'High']>;
+    publishedAt: Schema.Attribute.DateTime;
+    response: Schema.Attribute.DynamicZone<['text.text']>;
+    stage: Schema.Attribute.Enumeration<['open', 'inprogress', 'closed']>;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiMadinetmasrMadinetmasr extends Struct.CollectionTypeSchema {
   collectionName: 'madinetmasrs';
   info: {
@@ -1009,6 +1047,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::amergroup.amergroup': ApiAmergroupAmergroup;
       'api::madinetmasr.madinetmasr': ApiMadinetmasrMadinetmasr;
       'api::tmg.tmg': ApiTmgTmg;
       'plugin::content-releases.release': PluginContentReleasesRelease;
